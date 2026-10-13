@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tsany Al Fachrizy — Portfolio 2026</title>
+<meta name="description" content="Web developer & designer dari Cisauk, Indonesia. Crafting digital experiences through design, motion, and code." />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2314110E'/%3E%3Ctext x='50' y='72' font-family='Georgia' font-size='62' font-style='italic' fill='%23E8B559' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ivory: '#F5F1E8',
+          paper: '#EBE5D8',
+          char: '#14110E',
+          graphite: '#2A2622',
+          amber: '#C97B2E',
+          gold: '#E8B559',
+          muted: '#8A8378'
+        },
+        fontFamily: {
+          serif: ['"Instrument Serif"', 'serif'],
+          sans: ['"Inter Tight"', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace']
+        }
+      }
+    }
+  }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-ivory text-char font-sans antialiased overflow-x-hidden">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- STAGE 1 — GATE                               -->
+<!-- ═══════════════════════════════════════════ -->
+<div id="gate" class="stage fixed inset-0 z-[300] bg-char text-ivory flex flex-col justify-between px-[6vw] py-8">
+  <div class="flex justify-between items-center text-[0.7rem] font-mono tracking-[0.22em] uppercase text-gold/70">
+    <span>✦ PRIVATE ACCESS</span>
+    <span id="gate-time">--:--:--</span>
+    <span class="hidden md:inline">VER. 2026.04</span>
+  </div>
+
+  <div class="max-w-[820px] mx-auto w-full flex-1 flex flex-col justify-center">
+    <p class="font-mono text-[0.7rem] tracking-[0.25em] uppercase text-gold/70 mb-6">
+      — Step 1 / Authentication
+    </p>
+
+    <h1 class="font-serif italic text-[clamp(2.5rem,7vw,6.5rem)] leading-[0.95] tracking-[-0.03em] mb-4">
+      Who goes<br />there<span class="text-gold">?</span>
+    </h1>
+    <p class="font-sans text-[0.9rem] text-ivory/50 mb-12 max-w-[40ch]">
+      This is a private portfolio. Whisper the passcode and you shall pass.
+    </p>
+
+    <form id="gate-form" class="relative w-full max-w-[520px]">
+      <input
+        id="gate-input"
+        type="password"
+        inputmode="numeric"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="• • • •"
+        maxlength="8"
+        class="w-full bg-transparent border-b border-gold/40 focus:border-gold outline-none py-4 pr-16 font-mono text-[clamp(1rem,1.6vw,1.5rem)] tracking-[0.5em] placeholder:text-gold/30 text-ivory transition-colors duration-300"
+      />
+      <button type="submit" class="absolute right-0 top-1/2 -translate-y-1/2 font-mono text-xs tracking-[0.2em] uppercase text-gold hover:text-ivory transition-colors">
+        ENTER →
+      </button>
+    </form>
+
+    <p id="gate-hint" class="mt-6 font-mono text-[0.7rem] tracking-[0.18em] uppercase text-gold/60 h-5 transition-opacity duration-300"></p>
+
+    <div class="mt-12 flex items-center gap-4">
+      <div class="w-8 h-8 rounded-full border border-gold/30 flex items-center justify-center shrink-0">
+        <span class="text-gold text-xs">i</span>
+      </div>
+      <button id="gate-forgot" type="button" class="text-left font-mono text-[0.65rem] tracking-[0.2em] uppercase text-ivory/40 hover:text-gold transition-colors underline-sweep">
+        Klik di sini buat dapetin passcode-nya
+      </button>
+    </div>
+  </div>
+
+  <div class="flex justify-between items-center text-[0.7rem] font-mono tracking-[0.22em] uppercase text-gold/40">
+    <span>© 2026 — Tsany Al Fachrizy</span>
+    <span>CISAUK, ID</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- STAGE 2 — INTRO                              -->
+<!-- ═══════════════════════════════════════════ -->
+<div id="intro" class="stage fixed inset-0 z-[290] bg-char text-ivory hidden">
+  <div class="intro-bg absolute inset-0"></div>
+
+  <div class="relative h-full w-full flex flex-col justify-between px-[6vw] py-8">
+    <div class="flex justify-between items-center text-[0.7rem] font-mono tracking-[0.22em] uppercase text-gold/70 intro-line">
+      <span>✦ INITIALIZING</span>
+      <span id="intro-progress">000%</span>
+    </div>
+
+    <div class="max-w-[900px] mx-auto w-full">
+      <p class="font-mono text-[0.7rem] tracking-[0.25em] uppercase text-gold/70 mb-6 intro-line">
+        — Step 2 / Loading experience
+      </p>
+
+      <h2 class="font-serif text-[clamp(2rem,6vw,5.5rem)] leading-[0.95] tracking-[-0.03em] mb-10">
+        <span class="intro-line block overflow-hidden"><span class="intro-word inline-block">Welcome</span> <span class="intro-word inline-block">to</span></span>
+        <span class="intro-line block overflow-hidden"><span class="intro-word inline-block">my</span> <span class="intro-word inline-block italic text-gold">portfolio.</span></span>
+      </h2>
+
+      <div class="intro-line font-mono text-[0.7rem] tracking-[0.22em] uppercase text-ivory/50 mb-8">
+        <span id="intro-status">Mounting portfolio…</span>
+      </div>
+
+      <div class="intro-line w-full max-w-[520px] h-px bg-gold/20 relative overflow-hidden">
+        <div id="intro-bar" class="absolute left-0 top-0 h-full bg-gold w-0"></div>
+      </div>
+    </div>
+
+    <div class="flex justify-between items-center text-[0.7rem] font-mono tracking-[0.22em] uppercase text-gold/40 intro-line">
+      <span>Press anything to skip</span>
+      <span>— Awwwards level, allegedly</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- STAGE 3 — PORTFOLIO                          -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="grain-overlay" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-label" aria-hidden="true"><span></span></div>
+<div class="scroll-progress" aria-hidden="true"></div>
+<div class="mouse-gradient" aria-hidden="true"></div>
+
+<div class="top-indicator" aria-hidden="true">
+  <span class="top-indicator__current">01</span>
+  <span class="top-indicator__sep">/</span>
+  <span class="top-indicator__total">05</span>
+  <span class="top-indicator__label">Intro</span>
+</div>
+
+<nav class="side-nav" aria-label="Section navigation">
+  <div class="side-nav__progress" aria-hidden="true">
+    <span class="side-nav__percent">0%</span>
+  </div>
+  <a href="#hero" class="side-dot" data-section="hero" data-label="Intro"><span>Intro</span></a>
+  <a href="#about" class="side-dot" data-section="about" data-label="About"><span>About</span></a>
+  <a href="#expertise" class="side-dot" data-section="expertise" data-label="Expertise"><span>Expertise</span></a>
+  <a href="#skills" class="side-dot" data-section="skills" data-label="Skills"><span>Skills</span></a>
+  <a href="#contact" class="side-dot" data-section="contact" data-label="Contact"><span>Contact</span></a>
+</nav>
+
+<div class="utility-dock" aria-hidden="true">
+  <button id="theme-toggle" class="utility-btn" aria-label="Toggle theme" title="Toggle theme">
+    <span class="utility-icon">◐</span>
+  </button>
+  <button id="noise-toggle" class="utility-btn" aria-label="Toggle noise" title="Toggle noise">
+    <span class="utility-icon">◉</span>
+  </button>
+  <button id="sound-toggle" class="utility-btn" aria-label="Toggle sound" title="Toggle sound">
+    <span class="utility-icon">♪</span>
+  </button>
+  <button id="spotify-toggle" class="utility-btn utility-btn--spotify" aria-label="Open Spotify player" title="Now Playing">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+      <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+    </svg>
+  </button>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SPOTIFY PANEL                                -->
+<!-- ═══════════════════════════════════════════ -->
+<div id="spotify-backdrop" class="spotify-backdrop" aria-hidden="true"></div>
+
+<aside id="spotify-panel" class="spotify-panel" aria-hidden="true">
+  <header class="spotify-panel__header">
+    <div class="flex items-center gap-3">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="#1DB954" aria-hidden="true">
+        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+      </svg>
+      <span class="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-[#1DB954]">Spotify</span>
+    </div>
+    <button id="spotify-close" class="spotify-panel__close" aria-label="Close panel">✕</button>
+  </header>
+
+  <div class="spotify-panel__body">
+    <div class="spotify-panel__intro">
+      <p class="font-mono text-[0.6rem] tracking-[0.25em] uppercase text-muted mb-2">Now Playing</p>
+      <h3 class="font-serif italic text-[clamp(1.8rem,3vw,2.4rem)] leading-[1.05] tracking-[-0.02em] text-ink mb-1">
+        Playlist gua<span class="text-amber">.</span>
+      </h3>
+      <p class="font-mono text-[0.7rem] text-muted tracking-wider">
+        Lagu-lagu yang nemenin gua ngoding & santai.
+      </p>
+    </div>
+
+    <div class="spotify-embed-wrap">
+      <iframe
+        id="spotify-embed"
+        src="https://open.spotify.com/embed/playlist/19PL7zyqh2eo9GrPQliDJr?utm_source=generator&theme=0"
+        width="100%"
+        height="352"
+        frameborder="0"
+        allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+        title="Spotify Playlist Player"
+      ></iframe>
+    </div>
+
+    <div class="spotify-search">
+      <label for="spotify-search-input" class="spotify-search__label">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="M21 21l-4.35-4.35"></path>
+        </svg>
+        <span>Cari lagu di tracklist</span>
+      </label>
+      <input
+        id="spotify-search-input"
+        type="text"
+        placeholder="Ketik judul atau artist…"
+        autocomplete="off"
+        spellcheck="false"
+        class="spotify-search__input"
+      />
+    </div>
+
+    <!-- Mini player (auto-play hasil search) -->
+    <div id="spotify-mini" class="spotify-mini">
+      <div class="spotify-mini__header">
+        <span class="font-mono text-[0.6rem] tracking-[0.25em] uppercase text-[#1DB954]">▶ Now playing</span>
+        <button id="spotify-mini-close" class="spotify-mini__close" aria-label="Close mini player">✕</button>
+      </div>
+      <iframe
+        id="spotify-mini-embed"
+        src=""
+        width="100%"
+        height="80"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+        title="Spotify Track Player"
+      ></iframe>
+    </div>
+
+    <div class="spotify-tracklist-wrap">
+      <p class="spotify-tracklist__label">Tracklist — klik buat play</p>
+      <ul id="spotify-tracklist" class="spotify-tracklist"></ul>
+      <div id="spotify-empty" class="spotify-empty">
+        <p class="mb-3">Nggak ketemu di tracklist gua.</p>
+        <a id="spotify-search-link" href="#" target="_blank" rel="noopener noreferrer" class="spotify-search-btn">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="M21 21l-4.35-4.35"></path>
+          </svg>
+          <span id="spotify-search-text">Search di Spotify</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="spotify-panel__footer">
+      <a href="https://open.spotify.com/playlist/19PL7zyqh2eo9GrPQliDJr" target="_blank" rel="noopener noreferrer" class="spotify-action">
+        <span>Open in Spotify</span>
+        <span>↗</span>
+      </a>
+      <a href="https://open.spotify.com/playlist/19PL7zyqh2eo9GrPQliDJr" target="_blank" rel="noopener noreferrer" class="spotify-action spotify-action--follow">
+        <span>Follow Playlist</span>
+        <span>♥</span>
+      </a>
+    </div>
+  </div>
+</aside>
+
+<main id="site" class="relative opacity-0">
+
+  <!-- ═══════ HERO ═══════ -->
+  <section id="hero" class="hero-section relative min-h-screen flex flex-col justify-between px-[6vw] pt-10 pb-8 z-10" data-section="hero">
+
+    <header class="hero-header flex justify-between items-center text-[0.7rem] font-mono tracking-[0.22em] uppercase text-muted">
+      <span class="flex items-center gap-2">
+        <span class="hero-logo">✦</span>
+        <span>Tsany — Portfolio 2026</span>
+      </span>
+      <span class="hidden md:inline-flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-amber animate-pulse"></span>
+        <span>Available for work</span>
+      </span>
+      <span id="hero-clock">--:--:-- WIB</span>
+    </header>
+
+    <div class="hero-grid flex-1 grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-16 items-center my-auto py-16">
+
+      <div class="lg:col-span-7">
+        <p class="hero-eyebrow font-mono text-[0.7rem] tracking-[0.25em] uppercase text-amber mb-8">
+          ✦ <span id="greeting">Sekilas tentang gua</span>
+        </p>
+
+        <h1 class="hero-title font-serif leading-[0.9] tracking-[-0.045em] text-char text-[clamp(2.4rem,7.5vw,6.5rem)]">
+          <span class="hero-line block overflow-hidden">
+            <span class="hero-word inline-block">Halo,</span>
+            <span class="hero-word inline-block">gua</span>
+            <span class="hero-word inline-block italic text-amber">Tsany</span>
+          </span>
+          <span class="hero-line block overflow-hidden">
+            <span class="hero-word inline-block">—</span>
+            <span class="hero-word inline-block">web</span>
+            <span class="hero-word inline-block">developer</span>
+          </span>
+          <span class="hero-line block overflow-hidden">
+            <span class="hero-word inline-block">&</span>
+            <span class="hero-word inline-block">designer</span>
+            <span class="hero-word inline-block text-muted">dari</span>
+          </span>
+          <span class="hero-line block overflow-hidden">
+            <span class="hero-word inline-block text-muted">Cisauk,</span>
+            <span class="hero-word inline-block text-muted">Indonesia.</span>
+          </span>
+        </h1>
+
+        <p class="hero-sub mt-10 max-w-[54ch] text-[clamp(1rem,1.15vw,1.15rem)] text-muted leading-[1.75]">
+          Gua bikin website yang bukan cuma jalan, tapi juga enak dilihat dan enak dipakai. Fokus gua di desain yang clean, motion yang halus, dan kode yang rapi — biar setiap project kerasa personal dan berkualitas.
+        </p>
+
+        <div class="hero-cta mt-10 flex flex-wrap gap-4 font-mono text-[0.7rem] tracking-[0.2em] uppercase">
+          <a href="#about" class="magnetic-btn btn-primary inline-flex items-center gap-2 px-6 py-4" data-cursor="hover">
+            <span>Kenalan lebih jauh</span>
+            <span>→</span>
+          </a>
+          <a href="https://www.instagram.com/xyzpunk_/" target="_blank" rel="noopener noreferrer" class="magnetic-btn btn-outline inline-flex items-center gap-2 px-6 py-4" data-cursor="hover">
+            <span>Ngobrol yuk</span>
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 hero-info">
+        <div class="info-card">
+          <div class="info-card__header">
+            <span class="font-mono text-[0.6rem] tracking-[0.25em] uppercase text-amber">Now</span>
+            <span class="dot-live"></span>
+          </div>
+
+          <div class="info-card__body">
+            <p class="info-card__label">Currently</p>
+            <p class="info-card__value">Building things at <span class="italic text-amber">My Lab</span></p>
+
+            <p class="info-card__label mt-6">Location</p>
+            <p class="info-card__value">Cisauk, Tangerang — Indonesia</p>
+
+            <p class="info-card__label mt-6">Quote of the day</p>
+            <p class="info-card__value info-card__quote">"Code is poetry. Design is rhythm."</p>
+          </div>
+
+          <div class="info-card__footer">
+            <span>Scroll to explore</span>
+            <span>↓</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="hero-stats grid grid-cols-3 gap-6 md:gap-12 pt-8 border-t border-muted/20">
+      <div class="hero-stat">
+        <span class="block font-serif text-[clamp(2rem,3.5vw,3rem)] leading-none text-amber">8+</span>
+        <span class="block font-mono text-[0.65rem] tracking-[0.2em] uppercase text-muted mt-2">Years Experience</span>
+      </div>
+      <div class="hero-stat">
+        <span class="block font-serif text-[clamp(2rem,3.5vw,3rem)] leading-none text-amber">50+</span>
+        <span class="block font-mono text-[0.65rem] tracking-[0.2em] uppercase text-muted mt-2">Projects Done</span>
+      </div>
+      <div class="hero-stat">
+        <span class="block font-serif text-[clamp(2rem,3.5vw,3rem)] leading-none text-amber">30+</span>
+        <span class="block font-mono text-[0.65rem] tracking-[0.2em] uppercase text-muted mt-2">Happy Clients</span>
+      </div>
+    </div>
+
+    <div class="hero-bottom flex justify-between items-center pt-8 mt-8 border-t border-muted/20 text-[0.7rem] font-mono tracking-[0.2em] uppercase text-muted">
+      <span>© 2026 Tsany Al Fachrizy</span>
+      <a href="#about" class="flex items-center gap-3 hover:text-char transition-colors">
+        <span>SCROLL</span>
+        <span class="scroll-dot inline-block w-1.5 h-1.5 rounded-full bg-amber"></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════ QUOTE BREAK ═══════ -->
+  <section class="quote-break bg-paper py-[16vh] px-[6vw]">
+    <div class="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-3">
+        <p class="font-mono text-[0.7rem] tracking-[0.25em] uppercase text-amber mb-4">
+          ✦ Philosophy
+        </p>
+        <p class="font-mono text-[0.7rem] tracking-[0.22em] uppercase text-muted">
+          — 01 / 05
+        </p>
+      </div>
+      <div class="lg:col-span-9">
+        <blockquote class="quote-text font-serif text-[clamp(1.8rem,4.5vw,4rem)] leading-[1.1] tracking-[-0.03em] text-char pl-6">
+          <span class="quote-line block overflow-hidden"><span class="quote-word inline-block">"Design</span> <span class="quote-word inline-block">is</span> <span class="quote-word inline-block">not</span> <span class="quote-word inline-block">just</span> <span class="quote-word inline-block">what</span></span>
+          <span class="quote-line block overflow-hidden"><span class="quote-word inline-block">it</span> <span class="quote-word inline-block">looks</span> <span class="quote-word inline-block">like.</span> <span class="quote-word inline-block italic text-amber">Design</span></span>
+          <span class="quote-line block overflow-hidden"><span class="quote-word inline-block italic text-amber">is</span> <span class="quote-word inline-block">how</span> <span class="quote-word inline-block">it</span> <span class="quote-word inline-block">works."</span></span>
+        </blockquote>
+        <p class="mt-8 font-mono text-[0.7rem] tracking-[0.22em] uppercase text-muted pl-6">
+          — Steve Jobs, yang katanya
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ ABOUT ═══════ -->
+  <section id="about" class="about-section relative py-[18vh] px-[6vw] bg-ivory" data-section="about">
+    <div class="max-w-[1440px] mx-auto">
+
+      <div class="section-head flex items-center gap-5 mb-14">
+        <span class="font-mono text-[clamp(1.5rem,2.5vw,2rem)] text-amber section-num">02</span>
+        <span class="h-px flex-1 bg-muted/20"></span>
+        <span class="font-mono text-[0.7rem] tracking-[0.22em] uppercase text-muted scramble" data-text="About">About</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-x-16 gap-y-16 mb-20">
+        <div class="lg:col-span-8">
+          <h2 class="reveal-text font-serif text-[clamp(2rem,4.8vw,4.5rem)] leading-[1.05] tracking-[-0.03em]">
+            Digital experiences crafted by <span class="italic text-amber">Tsany Al Fachrizy</span>, a web developer & designer based in Cisauk, Indonesia. Currently exploring new tech & building things at <a href="#" class="underline-sweep text-amber">My Lab</a><span class="align-top text-[0.6em]">↗</span>
+          </h2>
+        </div>
+
+        <div class="lg:col-span-4 lg:pt-4">
+          <div class="stats-glass grid grid-cols-2 gap-x-6 gap-y-10 p-8">
+            <div>
+              <span class="block font-serif text-[clamp(2.5rem,4vw,3.5rem)] leading-none text-amber counter" data-target="8">0</span>
+              <span class="block font-mono text-[0.65rem] tracking-[0.2em] uppercase text-muted mt-3">Years of Coding</span>
+            </div>
+            <div>
+              <span class="block font-serif text-[clamp(2.5rem,4vw,3.5rem)] leading-none text-amber counter" data-target="120">0</span>
+              <span class="block font-mono text-[0.65rem] tracking-[0.2em] uppercase text-muted mt-3">Repositories Built</span>
+            </div>
+            <div>
+              <span class="block font-serif text-[clamp(2.5rem,4vw,3.5rem)] leading-none text-amber counter" data-target="45">0</span>
+              <span class="block font-mono text-[0.65rem] tracking-[0.2em] uppercase text-muted mt-3">Happy Collaborators</span>
+            </div>
+            <div>
+              <span class="block font-serif text-[clamp(2.5rem,4vw,3.5rem)] leading-none text-amber"><span class="counter" data-target="100">0</span>%</span>
+              <span class="block font-mono text-[0.65rem] tracking-[0.2em] uppercase text-muted mt-3">Coffee Infused</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-[1200px] mb-16">
+        <p class="reveal-text text-[1rem] leading-[1.75] text-muted border-t border-muted/20 pt-6">
+          Fokus utama saya adalah menjembatani celah antara desain visual yang memukau dan fungsionalitas kode yang efisien. Saya suka menghidupkan antarmuka statis menjadi interaksi yang dinamis dan interaktif.
+        </p>
+        <p class="reveal-text text-[1rem] leading-[1.75] text-muted border-t border-muted/20 pt-6">
+          Selalu penasaran dengan ekosistem web modern, saya menghabiskan waktu bereksperimen dengan animasi berbasis performa, arsitektur frontend yang bersih, dan user experience yang intuitif.
+        </p>
+        <p class="reveal-text text-[1rem] leading-[1.75] text-muted border-t border-muted/20 pt-6">
+          Bagi saya, coding bukan sekadar menulis sintaks, melainkan sebuah seni untuk menyelesaikan masalah dan memberikan pengalaman digital terbaik bagi pengguna.
+        </p>
+      </div>
+
+      <p class="reveal-text font-serif italic text-[0.85rem] text-muted max-w-[60ch]">
+        * Fachrizy / Al-Fachrizy diambil dari kata yang merepresentasikan kesatria, kebanggaan, dan tekad yang kuat.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ═══════ EXPERTISE ═══════ -->
+  <section id="expertise" class="relative bg-paper" data-section="expertise">
+    <div class="expertise-sticky h-screen overflow-hidden flex flex-col justify-center">
+      <div class="px-[6vw] mb-14 pt-[6vh]">
+        <div class="flex items-center gap-5">
+          <span class="font-mono text-[clamp(1.5rem,2.5vw,2rem)] text-amber">01</span>
+          <span class="h-px flex-1 bg-muted/20"></span>
+          <span class="font-mono text-[0.7rem] tracking-[0.22em] uppercase text-muted scramble" data-text="Expertise">Expertise — 11 Skills</span>
+        </div>
+        <h2 class="font-serif italic text-[clamp(2.5rem,6vw,6rem)] leading-[0.95] mt-8">
+          What I do<span class="text-amber">.</span>
+        </h2>
+        <p class="mt-4 font-mono text-[0.7rem] tracking-[0.22em] uppercase text-muted">
+          Scroll ke bawah untuk lihat semuanya →
+        </p>
+      </div>
+
+      <div class="expertise-track flex gap-8 pl-[6vw] pr-[6vw]" id="expertise-track"></div>
+    </div>
+  </section>
+
+  <!-- ═══════ MY SKILLS ═══════ -->
+  <section id="skills" class="py-[18vh] px-[6vw] bg-ivory" data-section="skills">
+    <div class="max-w-[1440px] mx-auto">
+      <div class="flex items-center gap-5 mb-14">
+        <span class="font-mono text-[clamp(1.5rem,2.5vw,2rem)] text-amber section-num">03</span>
+        <span class="h-px flex-1 bg-muted/20"></span>
+        <span class="font-mono text-[0.7rem] tracking-[0.22em] uppercase text-muted scramble" data-text="My Skills">My Skills</span>
+      </div>
+
+      <h2 class="font-serif italic text-[clamp(3rem,9vw,9rem)] leading-[0.9] tracking-[-0.04em] mb-20">
+        My Skills
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="skill-card tilt-card bg-paper/60 p-8 flex flex-col justify-between min-h-[300px] border border-muted/10" data-tilt data-ghost="01">
+          <span class="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-amber">01 / Architecture</span>
+          <div>
+            <h3 class="font-serif text-3xl mb-3">Frontend Engineering</h3>
+            <p class="text-[0.9rem] leading-relaxed text-muted">Scalable component architecture, SSR/SSG workflows, type-safe ecosystems dengan React & Next.js.</p>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-muted">Advanced</span>
+            <div class="skill-bar"><span style="width: 85%"></span></div>
+          </div>
+        </div>
+        <div class="skill-card tilt-card bg-paper/60 p-8 flex flex-col justify-between min-h-[300px] border border-muted/10" data-tilt data-ghost="02">
+          <span class="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-amber">02 / Aesthetics</span>
+          <div>
+            <h3 class="font-serif text-3xl mb-3">UI/UX & Systems</h3>
+            <p class="text-[0.9rem] leading-relaxed text-muted">Design tokens, wireframing, high-fidelity prototypes, dan design system governance.</p>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-muted">Expert</span>
+            <div class="skill-bar"><span style="width: 95%"></span></div>
+          </div>
+        </div>
+        <div class="skill-card tilt-card bg-paper/60 p-8 flex flex-col justify-between min-h-[300px] border border-muted/10" data-tilt data-ghost="03">
+          <span class="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-amber">03 / Motion</span>
+          <div>
+            <h3 class="font-serif text-3xl mb-3">Interactive Dynamics</h3>
+            <p class="text-[0.9rem] leading-relaxed text-muted">Physics-based animations, smooth scroll architectures, dan micro-interactions.</p>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-muted">Expert</span>
+            <div class="skill-bar"><span style="width: 90%"></span></div>
+          </div>
+        </div>
+        <div class="skill-card tilt-card bg-paper/60 p-8 flex flex-col justify-between min-h-[300px] border border-muted/10" data-tilt data-ghost="04">
+          <span class="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-amber">04 / Optimization</span>
+          <div>
+            <h3 class="font-serif text-3xl mb-3">Core Performance</h3>
+            <p class="text-[0.9rem] leading-relaxed text-muted">Lighthouse metrics optimization, asset pipeline tuning, dan GPU acceleration.</p>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-muted">Advanced</span>
+            <div class="skill-bar"><span style="width: 80%"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ CONTACT ═══════ -->
+  <section id="contact" class="py-[18vh] px-[6vw] bg-char text-ivory relative overflow-hidden" data-section="contact">
+    <div class="contact-glow absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+    <div class="max-w-[1440px] mx-auto relative z-10">
+      <div class="flex items-center gap-5 mb-14">
+        <span class="font-mono text-[clamp(1.5rem,2.5vw,2rem)] text-gold">04</span>
+        <span class="h-px flex-1 bg-gold/20"></span>
+        <span class="font-mono text-[0.7rem] tracking-[0.22em] uppercase text-gold/80 scramble" data-text="Get in Touch">Get in Touch</span>
+      </div>
+
+      <p class="font-mono text-[0.7rem] tracking-[0.25em] uppercase text-gold/70 mb-8">
+        Have an idea? Let's build it.
+      </p>
+
+      <a href="https://www.instagram.com/xyzpunk_/" target="_blank" rel="noopener noreferrer" class="hello-link block group" data-cursor="hover">
+        <span class="hello-glow" aria-hidden="true"></span>
+        <h2 class="font-serif italic text-[clamp(4.5rem,16vw,16rem)] leading-[0.85] tracking-[-0.04em] transition-colors duration-500 relative z-10">
+          HELLO<span class="not-italic text-gold">.</span>
+        </h2>
+      </a>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-20 pt-10 border-t border-gold/20">
+        <div>
+          <p class="font-mono text-[0.7rem] tracking-[0.2em] uppercase text-gold mb-3">Available for</p>
+          <p class="text-ivory/70 max-w-[42ch] leading-relaxed font-light mb-6">
+            Select freelance projects, creative direction, and high-end interactive development worldwide.
+          </p>
+          <button class="copy-email magnetic-btn btn-outline-light inline-flex items-center gap-2 px-5 py-3 font-mono text-[0.65rem] tracking-[0.2em] uppercase" data-copy="hello@al-fachrizy.com">
+            <span class="copy-label">Copy email</span>
+            <span>⧉</span>
+          </button>
+        </div>
+        <div class="flex flex-col lg:items-end justify-between gap-8">
+          <div class="flex flex-wrap gap-8 font-mono text-[0.7rem] tracking-[0.2em] uppercase">
+            <a href="https://www.instagram.com/xyzpunk_/" target="_blank" rel="noopener noreferrer" class="underline-sweep hover:text-gold">Instagram</a>
+            <a href="#" class="underline-sweep hover:text-gold">GitHub</a>
+            <a href="#" class="underline-sweep hover:text-gold">LinkedIn</a>
+            <a href="#" class="underline-sweep hover:text-gold">Twitter</a>
+          </div>
+          <div class="font-mono text-[0.7rem] tracking-[0.2em] uppercase text-gold/70 flex items-center gap-2">
+            <span>Designed & built with passion</span>
+            <span class="heartbeat text-amber">♥</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ FOOTER GLOBAL ═══════ -->
+  <footer class="bg-char text-ivory px-[6vw] py-12 border-t border-graphite">
+    <div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-end">
+      <div>
+        <p class="font-serif italic text-3xl mb-2">Tsany Al Fachrizy<span class="text-gold">.</span></p>
+        <p class="font-mono text-[0.7rem] tracking-[0.2em] uppercase text-muted">Web Developer & Designer</p>
+      </div>
+      <div class="font-mono text-[0.7rem] tracking-[0.2em] uppercase text-muted md:text-center">
+        <p>Cisauk, Indonesia</p>
+        <p class="mt-1" id="footer-time">--:--:-- WIB</p>
+      </div>
+      <div class="font-mono text-[0.7rem] tracking-[0.2em] uppercase text-muted md:text-right">
+        <p>© 2026 — All rights reserved</p>
+        <p class="mt-1">Made with <span class="text-amber">♥</span> & coffee</p>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<div id="toast" class="toast" aria-hidden="true">
+  <span id="toast-text">Copied!</span>
+</div>
+
+<button id="back-top" class="back-top" aria-label="Back to top">
+  <span>↑</span>
+</button>
+
+<script src="script.js"></script>
+</body>
+</html>
